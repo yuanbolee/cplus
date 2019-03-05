@@ -1,0 +1,1 @@
+array_point is descirbe array(list) and point.

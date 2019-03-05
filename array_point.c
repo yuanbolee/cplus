@@ -1,6 +1,4 @@
 #include<stdio.h>
-#include<stdlib.h>
-#include<math.h>
 #define M 10
 #define N 10
 void main(){
@@ -35,8 +33,5 @@ void main(){
          printf("(%2d)",*(p+i)[j]);
        printf("\n");
    }
-
-
-  // for(int k=0;k<500;k++)
-   //	printf("The num is %d;char is %c.\n",k,k);
+   //*pp=arr;
 }
