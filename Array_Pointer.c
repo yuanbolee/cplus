@@ -27,7 +27,7 @@ void main(){
          printf("(%2d)",(*(p+i))[j]);
       printf("\n");
    }
-   //also the same as p[i][j]
+   //also the same as p[i][j],*(p[i]+i),*(*(p+i)+j)
    printf("the end\n");
    for(i=0;i<M;i++){
       for(j=0;j<N;j++)
