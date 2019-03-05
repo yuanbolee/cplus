@@ -33,5 +33,5 @@ void main(){
          printf("(%2d)",*(p+i)[j]);
        printf("\n");
    }
-   //*pp=arr;
+   *pp=&arr[0][0];
 }
