@@ -1,6 +1,6 @@
 #include<stdio.h>
-#define M 10
-#define N 10
+#define M 10  //array row
+#define N 10  //array column
 void main(){
    int i,j,k;
    char c;
@@ -34,4 +34,5 @@ void main(){
        printf("\n");
    }
    *pp=&arr[0][0];
+
 }
