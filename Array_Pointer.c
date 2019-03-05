@@ -6,7 +6,7 @@ void main(){
    char c;
    int Array[ROW][COL];
    int *array=&Array[0][0];
-   int (*p)[COL];
+   int (*p)[COL];  //int pointer
    int *pp[ROW];
    p=Array;
 
