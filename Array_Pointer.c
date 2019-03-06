@@ -3,7 +3,6 @@
 #define COL 10  //array column
 void main(){
    int i,j,k;
-   char c;
    int Array[ROW][COL];
    int *array=&Array[0][0];
    int (*p)[COL];  //int pointer
