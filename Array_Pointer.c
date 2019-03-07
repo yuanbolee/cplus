@@ -45,7 +45,11 @@ void main(int argc,char *argv[]){
       printf("\n");
    }
    printf("the end\n");
-   //*ap=&Array[0][0];
+   for(i=0;i<ROW;i++){
+      *(ap+i)=Array[i][0];
+      printf("(%4d)",ap[i]);// ap[i] the same as *(ap+i)
+   }
+   printf("\nthe end\n");
    pa=Array;
    p=&Array[0][0];
    printf("The size of (char=%ld),(short=%ld),(int=%ld),(long=%ld),(float=%ld),(double=%ld)\n",
