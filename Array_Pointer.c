@@ -4,7 +4,7 @@
 void main(){
    int i,j,k;
    int Array[ROW][COL];
-   int *array=&Array[0][0];
+   int *ap=&Array[0][0];
    int (*p)[COL];  //int pointer
    int *pp[ROW];
    p=Array;
@@ -16,7 +16,7 @@ void main(){
          Array[i][j]=10*i+j;
    
    for (i=0,j=1;i<ROW*COL+4;i++,++j){
-      printf("(%2d)",*(array++));
+      printf("(%2d)",*(ap++));
       if (j==COL ){
          printf("\n");
          j=0;
