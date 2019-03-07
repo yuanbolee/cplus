@@ -1,7 +1,7 @@
 #include<stdio.h>
 #define ROW 10  //array row
 #define COL 10  //array column
-void main(){
+void main(int argc,char *argv[]){
    int i,j;
    int Array[ROW][COL];//array
    int *p=&Array[0][0];// pointer of int
