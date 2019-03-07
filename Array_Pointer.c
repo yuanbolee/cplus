@@ -41,7 +41,7 @@ void main(){
    printf("Output Array by use pa.\n");
    for(i=0;i<ROW;i++){
       for(j=0;j<COL;j++)
-      printf("(%2d)", (int *)(*(pa+i)[0]+j));
+      printf("(%2d)", *(pa+i)[0]+j);
       printf("\n");
    }
    printf("the end\n");
