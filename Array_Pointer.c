@@ -48,18 +48,18 @@ void main(){
    //*ap=&Array[0][0];
    pa=Array;
    p=&Array[0][0];
-   printf("The size of (char=%ld),(short=%ld),(int=%ld),(long=%ld),(float=%ld),(double=%ld)\n",\
+   printf("The size of (char=%ld),(short=%ld),(int=%ld),(long=%ld),(float=%ld),(double=%ld)\n",
       sizeof(char),sizeof(short),sizeof(int),sizeof(long),sizeof(float),sizeof(double));
-   printf("The (address+1) subtract address equal (Array=%ld),(p=%ld),(pa=%ld),(ap=%ld)\n",\
-      (unsigned long)(Array+1)-(unsigned long)Array,\
-      (unsigned long)(p+1)-(unsigned long)p,\
-      (unsigned long)(pa+1)-(unsigned long)pa,\
+   printf("The (address+1) subtract address equal (Array=%ld),(p=%ld),(pa=%ld),(ap=%ld)\n",
+      (unsigned long)(Array+1)-(unsigned long)Array,
+      (unsigned long)(p+1)-(unsigned long)p,
+      (unsigned long)(pa+1)-(unsigned long)pa,
       (unsigned long)(ap+1)-(unsigned long)ap);
-   printf("The size of (Array[][]=%ld),(&Array=%ld),(Array=%ld)\n",\
+   printf("The size of (Array[][]=%ld),(&Array=%ld),(Array=%ld)\n",
       sizeof(Array[0][0]),sizeof(&Array),sizeof(Array));
-   printf("The size of (p=%ld),(pa=%ld),(ap=%ld)\n",\
+   printf("The size of (p=%ld),(pa=%ld),(ap=%ld)\n",
       sizeof(p),sizeof(pa),sizeof(ap));
-   printf("The size of (*p=%ld),(*pa=%ld),(*ap=%ld)\n",\
+   printf("The size of (*p=%ld),(*pa=%ld),(*ap=%ld)\n",
       sizeof(*p),sizeof(*pa),sizeof(*ap));
    printf("NOTICE:\nThe results are different of 32bit or 64bit compiler");
 
