@@ -15,9 +15,9 @@ void main(){
       for(j=0;j<COL;j++)
          Array[i][j]=10*i+j;
    
-   for (i=0,j=1;i<ROW*COL+4;i++,++j){
+   for (i=0,j=1;i<ROW*COL+1;i++,++j){
       printf("(%2d)",*(p++));
-      if (j==COL ){
+      if (j==COL){
          printf("\n");
          j=0;
       }
@@ -36,5 +36,4 @@ void main(){
        printf("\n");
    }
    *ap=&Array[0][0];
-
 }
