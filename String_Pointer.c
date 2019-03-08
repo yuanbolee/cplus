@@ -4,7 +4,7 @@
 void main(int argc ,char *argv[]){
     int i,j;
     char *p,**pp;
-    char str[]="I aArray_N a geek!";
+    char str[]="I am a geek!";
     char * pstr[]={"Hello,World","Monkeys like peach",
         "Standing shoulder of gaint","团结就是力量"};
     printf("%s\n",str);
