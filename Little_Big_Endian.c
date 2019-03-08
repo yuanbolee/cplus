@@ -12,7 +12,4 @@ void main(){
     else{
         printf("Big Endian");
     }
-    
-
-
 }
