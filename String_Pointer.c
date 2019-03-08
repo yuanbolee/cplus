@@ -8,6 +8,8 @@ void main(int argc ,char *argv[]){
     char * pstr[]={"Hello,World","Monkeys like peach",
         "Standing shoulder of gaint","团结就是力量"};
     printf("%s\n",str);
+    p=str;
+    printf("%s\n",p);
     for(i=0;i<Array_N;i++)
         printf("%s\n",pstr[i]);
     pp=pstr+Array_N-1;
