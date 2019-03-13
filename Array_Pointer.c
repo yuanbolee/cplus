@@ -46,8 +46,8 @@ void main(int argc,char *argv[]){
    }
    printf("the end\n");
    for(i=0;i<ROW;i++){
-      *(ap+i)=Array[i][0];
-      printf("(%4d)",ap[i]);// ap[i] the same as *(ap+i)
+      *(ap+i)=Array[i];
+      printf("(%4d)",*ap[i]);// ap[i] the same as *(ap+i)
    }
    printf("\nthe end\n");
    pa=Array;
