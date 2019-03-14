@@ -26,5 +26,10 @@ enum Month{
 int main(){
     enum Week w;
     enum Month m;
+    for(w=Monday;w<=Sunday;w++){
+        for(m=January;m<=December;m++)
+            printf("(%d,%d)",w,m);
+        printf("\n");
+    }
     return 0;
 }
