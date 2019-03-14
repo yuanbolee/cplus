@@ -2,15 +2,22 @@
 #include <ctype.h>
 #include <string.h>
 union Ans_bit{
+    struct A{
+        unsigned :4;
+        unsigned a:1;
+        unsigned b:1;
+        unsigned c:1;
+        unsigned d:1;
+    };
     struct B{
-    unsigned a:1;
-    unsigned b:1;
-    unsigned c:1;
-    unsigned d:1;
-    unsigned e:1;
-    unsigned f:1;
-    unsigned g:1;
-    unsigned h:1;
+        unsigned a:1;
+        unsigned b:1;
+        unsigned c:1;
+        unsigned d:1;
+        unsigned e:1;
+        unsigned f:1;
+        unsigned g:1;
+        unsigned h:1;
     } bit;
     char ans;
 };
