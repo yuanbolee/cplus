@@ -8,7 +8,7 @@ union Ans_bit{
         unsigned b:1;
         unsigned c:1;
         unsigned d:1;
-    };
+    }abit;
     struct B{
         unsigned a:1;
         unsigned b:1;
@@ -43,8 +43,8 @@ int main(){
     int i;
     char c;
     union Ans_bit ab;
-    initAB(&ab);
-
+    //initAB(&ab);
+    memset(&ab,0,1);
     printf("Please input ans:");
     scanf("%s",anstr);
     printf("Input string is (%8s)\n",anstr);
