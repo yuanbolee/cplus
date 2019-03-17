@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 #define StrN 100
+#define bool int
+#define true 1
+#define false 0
 
 struct node {
     char name[StrN];
@@ -13,122 +16,221 @@ struct List{
     int Listnum;
 };
 
-int Search_node(struct List *L,struct node dnode){
+int Search_node(struct List *L,struct node * snode){
     int i;
     struct node *p;
     if(L->Listnum==0 ) return 0;
     else{
         p=L->head;
-        for(i=0;i<L->Listnum;i++){
-            if( !strcmp(dnode.name,p->name) && (dnode.m==p->m)){
-                return (i+1);break;
-            }
+        for(i=1;i<=L->Listnum;i++){
+            if( !strcmp(snode->name,p->name)||(snode->m==p->m))
+                return i;
         }
     }
     return 0;
 }
-
-void initlist(struct List *L,int n){
-    int i,num;
-    char pname[StrN] ;
-    struct node *p,*plink;
-    
-    plink=NULL;
-    if(n==1){
-        L->head=(struct node *)malloc(sizeof(struct node));
-        if(L->head!=NULL){
-            strcpy(L->head->name,"start");
-            L->head->m=0;
-            L->head->next=NULL;
-            L->head->link=NULL;
-            L->tail=L->head;
-            L->Listnum=1;
+struct node *create_node(int i){
+    int pnum;
+    char pname[StrN];
+    struct node *p;
+    p=(struct node *)malloc(sizeof(struct node));
+    if(p){
+        if(i==-1){
+            puts("Please input a node");
+            printf("Input node name:");
+            scanf("%s",pname);
+            printf("Input node num:");
+            scanf("%d",&pnum);
+        }else{
+            printf("Input node(%d) name:",i);
+            scanf("%s",pname);
+            printf("Input node(%d) num:",i);
+            scanf("%d",&pnum);
         }
-        else L->Listnum=0;
+        if((pnum==0)||(strlen(p->name)>1))return NULL;
+        strcpy(p->name,pname);
+        p->m=pnum;
+        return p;
+    }else return NULL;
+}
+int Destroy_List(struct List *L){
+    int i;
+    struct node *p,*delp;
+    if(L->Listnum==0) {
+        printf("do not have node!\n");
+        return false;
     }
-    if(n>1){
-        for (i=0;i<n;i++){
-            p=(struct node *)malloc(sizeof(struct node));
+    p=L->tail;
+    for(i=0;i<L->Listnum;i++) {
+        delp=p;
+        p=p->link;
+        free(delp);
+    }
+    L->head=NULL;
+    L->tail=NULL;
+    L->Listnum=0;
+    return true;
+}
+void initlist(struct List *L,int n){
+    int i;
+    struct node *p,*plink;
+    plink=NULL;
+
+    if(n>=1){
+        for (i=1;i<=n;i++){
+            p=create_node(i);
             if(p){
-                printf("Input node(%d) of name:",i+1);
-                scanf("%s",pname);
-                printf("Input node(%d) of m:",i+1);
-                scanf("%d",&num);
-                strcpy(p->name,pname);
-                p->m=num;
-                if(Search_node(L,*p)>0){
+                if(Search_node(L,p)>0){
                     i--;
                     printf("List have same node!\n");
+                    free(p);
                     continue;
                 }
-                if(i==0) {
+                if(i==1) {
                     L->head=p;
                     L->Listnum=1;
-                    plink=p;
+                    if(n==1){
+                        L->tail=p;
+                        p->link=p;
+                        p->next=p;
                     }
-                else if(i==n-1){
-                    L->tail=p;
-                    plink->next=p;
-                    p->next=L->head;
-                    p->link=plink;
-                    L->Listnum++;
-                }
-                else{
-                    p->link=plink;
-                    plink->next=p;
                     plink=p;
-                    L->Listnum++;
+                    }else if((i==n)){
+                        L->tail=p;
+                        plink->next=p;
+                        p->next=L->head;
+                        p->link=plink;
+                        L->Listnum++;
+                    }else{
+                        p->link=plink;
+                        plink->next=p;
+                        plink=p;
+                        L->Listnum++;
+                    }
+                }else{
+                    puts("Create node error!\nExit ");
+                    //Destroy_List(L);
+                    break;
                 }
-    
-            }
         }
     }
 }
 
 int Insert_node(struct List *L,struct node *inode){
-    return 0;
+    if(Search_node(L,inode)>0){
+        puts("List have same node");
+        return 0;
+    }else{
+        puts("List insert sucess!");
+        L->tail->link->next=inode;
+        inode->link=L->tail;
+        inode->next=L->head;
+        L->tail=inode;
+        L->Listnum++;
+        return 1;
+    }
 }
 
-int Delete_node(struct List *L,struct node dnode){
-    return 0;
-}
-int Sort_List(struct List *L){
-    return 0;
-}
-int Print_List(struct List *L){
-    int i;
+int Delete_node(struct List *L,struct node* dnode){
+    int delnum,i;
     struct node *p;
-    if(L->Listnum==0) return 0;
-    p=L->head;
-    printf("Print List:\n");
-    for(i=0;i<L->Listnum;i++,p=p->next)
-        printf("Node%i is (%s,%d)\n",i+1,p->name,p->m);
-    free(p);
-    return 1;
-}
-int Destroy_List(struct List *L){
-    int i;
-    struct node *p;
-    if(L->Listnum==0) exit(0);
-    p=L->tail;
-    printf("Print List:\n");
-    for(i=0;i<L->Listnum;i++,p=p->link) 
+    delnum=Search_node(L,dnode);
+    if(delnum>0){
+        if (delnum==1){
+            if(L->Listnum==1){
+                Destroy_List(L);
+                return 0;
+            }
+            p=L->head;
+            L->head=L->head->next;
+        }else if(L->Listnum==delnum){
+            p=L->tail;
+            L->tail=L->tail->link;
+        }else{
+            p=L->head;
+            for(i=1;i<=L->Listnum;i++,p=p->next){
+                if (i==delnum) break;
+            }
+        }
+        p->link->next=p->next;
+        p->next->link=p->link;
+        L->Listnum--;
+        free(dnode);
         free(p);
-    L->head=NULL;
-    L->tail=NULL;
-    L->Listnum=0;
+        puts("List insert sucess!");
+        return delnum;
+    }else{
+        puts("List not have same node,delete node is not exist.");
+        return false;
+    }
+}
+int Sort_List(struct List *L,bool seril){
+    struct node *pb,*pa;
+    int i,j;
+    if(L->Listnum<=1) return 1;
+    if(seril){
+
+    }else{
+
+    }
     return 0;
+}
+int Print_List(struct List *L,bool reverse){
+    int i;
+    struct node *p;
+    printf("Print List number is (%d):\n",L->Listnum);
+    if(L->Listnum==0) {
+        printf("List have no node!\n");
+        return false;
+    }else{
+        if(reverse){
+            p=L->tail;
+            for(i=L->Listnum;i>0;i--,p=p->link)
+                printf("Node(%i) is (%s,%d)\n",i,p->name,p->m);
+        }else{
+            p=L->head;
+            for(i=0;i<L->Listnum;i++,p=p->next)
+                printf("Node(%i) is (%s,%d)\n",i+1,p->name,p->m);
+        }
+    }
+    return true;
 }
 
 
 int main(int argc,char *arg[]){
     struct List L;
+    struct node *p;
     int n;
     printf("Please input num of nodes:");
     scanf("%d",&n);
-    if(n>1) initlist(&L ,n);
+    if(n>=1) initlist(&L ,n);
     else exit(0);
-    Print_List(&L);
+    Print_List(&L,false);
+    Print_List(&L,true);
+    while(true){
+        puts("\nNow is insert node.");
+        p=create_node(-1);
+        if(!p) {
+            puts("Error of create node");
+            break;
+        }else if(Insert_node(&L,p)){
+            Print_List(&L,true);
+            break;
+        }
+    }
+    while(true){
+        puts("Now is delete node.");
+        p=create_node(-1);
+        if(!p) {
+            puts("Error of create node");
+            break;
+        }else if(Delete_node(&L,p)) {
+            Print_List(&L,true);
+            break;
+            }
+    }
+    Destroy_List(&L);
+    
     return 0;
 }
 
