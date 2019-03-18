@@ -95,19 +95,17 @@ void initlist(struct List *L,int n){
                         p->next=p;
                     }
                     plink=p;
-                    }else if((i==n)){
+                }else{ 
+                    p->link=plink;
+                    plink->next=p;
+                    plink=p;
+                    L->Listnum++;
+                    if(i==n){
                         L->tail=p;
-                        plink->next=p;
                         p->next=L->head;
-                        p->link=plink;
-                        L->Listnum++;
-                    }else{
-                        p->link=plink;
-                        plink->next=p;
-                        plink=p;
-                        L->Listnum++;
+                        }
                     }
-                }else{
+            }else{
                     puts("Create node error!\nExit ");
                     //Destroy_List(L);
                     break;
@@ -164,22 +162,32 @@ int Delete_node(struct List *L,struct node* dnode){
         return false;
     }
 }
+void Swap_node(struct node *pb,struct node *pa){
+    char pname[StrN];
+    pa->m+=pb->m;
+    pb->m=(pa->m)-(pb->m);
+    pa->m=(pa->m)-(pb->m);
+    strcpy(pname,pa->name);
+    strcpy(pa->name,pb->name);
+    strcpy(pb->name,pname);
+}
+
 int Sort_List(struct List *L,bool seril){
     struct node *pb,*pa;
-    int i,j;
+    int i;
     if(L->Listnum<=1) return 1;
     if(seril){
-        do{pb=L->head;
-        pa=pb->next;
-        if((pa->m)>(pb->m)){
-            pa->m+=pb->m;
-            pb->m=pa->m-pb->m;
-            pa->m=pa->m-pb->m;
-        }
-
+        pb=L->head;
+        do{ pa=pb->next;
+            if((pa->m)>(pb->m))Swap_node(pb,pa);
+            pb=pb->next;
         }while(pa!=L->tail);
     }else{
-
+        pa=L->tail;
+        do{ pb=pa->link;
+            if((pa->m)>(pb->m))Swap_node(pb,pa);
+            pa=pa->link;
+        }while(pb!=L->head);
     }
     return 0;
 }
