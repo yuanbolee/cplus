@@ -1,5 +1,4 @@
-#pragma once 
-#include "config.h"
+
 
 int Print_List(struct List *L,bool reverse){
     int i;

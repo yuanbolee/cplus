@@ -1,5 +1,4 @@
-#pragma once 
-#include "config.h"
+
 
 bool Destroy_List(struct List *L){
     int i;

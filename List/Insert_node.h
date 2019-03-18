@@ -1,4 +1,4 @@
-#include "config.h"
+
 
 int Insert_node(struct List *L,struct node *inode){
     if(Search_node(L,inode)>0){

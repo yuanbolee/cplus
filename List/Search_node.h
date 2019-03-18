@@ -1,4 +1,4 @@
-#include "config.c"
+
 int Search_node(struct List *L,struct node * snode){
     int i;
     struct node *p;

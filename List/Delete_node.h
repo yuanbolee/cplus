@@ -1,4 +1,4 @@
-#include "config.h"
+
 
 int Delete_node(struct List *L,struct node *dnode){
     int delnum,i;

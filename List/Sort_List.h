@@ -1,8 +1,4 @@
 
-#pragma once 
-#include "config.h"
-
-
 void Swap_node(struct node *pb,struct node *pa){
     char pname[StrN];
     pa->m+=pb->m;
