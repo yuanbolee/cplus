@@ -1,4 +1,3 @@
-
 void initlist(struct List *L,int n){
     int i;
     struct node *p,*plink;
@@ -42,3 +41,4 @@ void initlist(struct List *L,int n){
         }
     }
 }
+

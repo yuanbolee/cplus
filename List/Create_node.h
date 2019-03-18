@@ -1,5 +1,3 @@
-#include "config.c"
-
 struct node *create_node(int i){
     int pnum;
     char pname[StrN];

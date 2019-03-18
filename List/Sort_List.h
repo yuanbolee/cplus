@@ -1,7 +1,7 @@
-#ifndef _CF_
-#define _CF_
-#include "config.c"
-#endif
+
+#pragma once 
+#include "config.h"
+
 
 void Swap_node(struct node *pb,struct node *pa){
     char pname[StrN];
