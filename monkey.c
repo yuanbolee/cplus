@@ -169,7 +169,15 @@ int Sort_List(struct List *L,bool seril){
     int i,j;
     if(L->Listnum<=1) return 1;
     if(seril){
+        do{pb=L->head;
+        pa=pb->next;
+        if((pa->m)>(pb->m)){
+            pa->m+=pb->m;
+            pb->m=pa->m-pb->m;
+            pa->m=pa->m-pb->m;
+        }
 
+        }while(pa!=L->tail);
     }else{
 
     }
