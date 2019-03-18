@@ -1,4 +1,10 @@
 #include "config.c"
+#include "Create_node.c"
+#include "Delete_node.c"
+
+#include "Insert_node.c"
+#include "Destroy_List.c"
+#include "Init_List.c"
 
 int main(int argc,char *arg[]){
     struct List L;
