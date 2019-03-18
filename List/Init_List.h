@@ -1,5 +1,6 @@
-
-void initlist(struct List *L,int n){
+extern struct node;
+extern struct List;
+void Init_List(struct List *L,int n){
     int i;
     struct node *p,*plink;
     int Sort_List(struct List *L,bool seril);
@@ -7,7 +8,7 @@ void initlist(struct List *L,int n){
 
     if(n>=1){
         for (i=1;i<=n;i++){
-            p=create_node(i);
+            p=Create_node(i);
             if(p){
                 if(Search_node(L,p)>0){
                     i--;

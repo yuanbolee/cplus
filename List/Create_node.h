@@ -1,4 +1,4 @@
-struct node *create_node(int i){
+struct node *Create_node(int i){
     int pnum;
     char pname[StrN];
     struct node *p;

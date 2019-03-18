@@ -17,35 +17,33 @@ struct List{
     int Listnum;
 };
 
-
-
-#include "Create_node.h"
-#include "Delete_node.h"
-#include "Insert_node.h"
-//
-#include "Sort_List.h"
-#include "Destroy_List.h"
+#include"Print_List.h"
 #include "Init_List.h"
-
-#ifndef _CF_H
-#define _CF_H
-#include "config.h"
-#endif
-
-
+#include "Create_node.h"
+    extern int Print_List(struct List *L,bool reverse);
+    extern void Init_List(struct List *L,int n);
+    extern int Search_node(struct List *L,struct node * snode);
+    extern struct node *Create_node(int i);
+    extern int Insert_node(struct List *L,struct node *inode);
+    extern int Delete_node(struct List *L,struct node *dnode);
+    extern bool Destroy_List(struct List *L);
+    extern int Print_List(struct List *L,bool reverse);
 int main(int argc,char *arg[]){
+
+
+
     struct List L;
     struct node *p;
     int n;
     printf("Please input num of nodes:");
     scanf("%d",&n);
-    if(n>=1) initlist(&L ,n);
+    if(n>=1) Init_List(&L ,n);
     else exit(0);
     Print_List(&L,false);
     Print_List(&L,true);
     while(true){
         puts("\nNow is insert node.");
-        p=create_node(-1);
+        p=Create_node(-1);
         if(!p) {
             puts("Error of create node");
             break;
@@ -56,7 +54,7 @@ int main(int argc,char *arg[]){
     }
     while(true){
         puts("Now is delete node.");
-        p=create_node(-1);
+        p=Create_node(-1);
         if(!p) {
             puts("Error of create node");
             break;
