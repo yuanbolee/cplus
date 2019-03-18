@@ -74,6 +74,7 @@ int Destroy_List(struct List *L){
 void initlist(struct List *L,int n){
     int i;
     struct node *p,*plink;
+    int Sort_List(struct List *L,bool seril);
     plink=NULL;
 
     if(n>=1){
@@ -104,6 +105,7 @@ void initlist(struct List *L,int n){
                         L->tail=p;
                         p->next=L->head;
                         }
+                    Sort_List(L,false);
                     }
             }else{
                     puts("Create node error!\nExit ");
