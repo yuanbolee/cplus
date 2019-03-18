@@ -117,7 +117,7 @@ void initlist(struct List *L,int n){
                         }
                     }
             }else{
-                    puts("Create node error!\nExit ");
+                    puts("Create List error!\nExit ");
                     //Destroy_List(L);
                     break;
                 }
@@ -153,11 +153,8 @@ int Delete_node(struct List *L,struct node *dnode){
             if(delnum==L->Listnum){p=L->tail;L->tail=L->tail->link;}
             if(delnum>1 && delnum<L->Listnum){
                 p=L->head;
-                for(i=1;i<=L->Listnum;i++){
-                    if(i=delnum) break;
-                    p=p->next;
-                }
-
+                for(i=1;i<=L->Listnum;i++,p=p->next)
+                    if(i==delnum) break;
             }
             p->link->next=p->next;
             p->next->link=p->link;
