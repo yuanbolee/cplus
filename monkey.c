@@ -23,12 +23,14 @@ int Search_node(struct List *L,struct node * snode){
     else{
         p=L->head;
         for(i=1;i<=L->Listnum;i++){
-            if( !strcmp(snode->name,p->name)||(snode->m==p->m))
-                return i;
+            if((!strcmp(snode->name,p->name)) || (snode->m==p->m)) return i;
+            p=p->next;
         }
     }
     return 0;
 }
+
+
 struct node *create_node(int i){
     int pnum;
     char pname[StrN];
@@ -47,12 +49,16 @@ struct node *create_node(int i){
             printf("Input node(%d) num:",i);
             scanf("%d",&pnum);
         }
-        if((pnum==0)||(strlen(p->name)>1))return NULL;
+        if(pnum<=0)return NULL;
         strcpy(p->name,pname);
         p->m=pnum;
+        p->next=NULL;
+        p->link=NULL;
         return p;
     }else return NULL;
 }
+
+
 int Destroy_List(struct List *L){
     int i;
     struct node *p,*delp;
@@ -71,6 +77,8 @@ int Destroy_List(struct List *L){
     L->Listnum=0;
     return true;
 }
+
+
 void initlist(struct List *L,int n){
     int i;
     struct node *p,*plink;
@@ -105,7 +113,6 @@ void initlist(struct List *L,int n){
                         L->tail=p;
                         p->next=L->head;
                         }
-                    Sort_List(L,false);
                     }
             }else{
                     puts("Create node error!\nExit ");
@@ -131,7 +138,7 @@ int Insert_node(struct List *L,struct node *inode){
     }
 }
 
-int Delete_node(struct List *L,struct node* dnode){
+int Delete_node(struct List *L,struct node *dnode){
     int delnum,i;
     struct node *p;
     delnum=Search_node(L,dnode);
@@ -139,17 +146,20 @@ int Delete_node(struct List *L,struct node* dnode){
         if (delnum==1){
             if(L->Listnum==1){
                 Destroy_List(L);
-                return 0;
+                return true;
             }
             p=L->head;
             L->head=L->head->next;
-        }else if(L->Listnum==delnum){
+        }
+        if(L->Listnum==delnum && (delnum!=1)){
             p=L->tail;
             L->tail=L->tail->link;
-        }else{
+        }
+        if((L->Listnum>delnum) && (delnum!=1) ){
             p=L->head;
-            for(i=1;i<=L->Listnum;i++,p=p->next){
+            for(i=1;i<=L->Listnum;i++){
                 if (i==delnum) break;
+                p=p->next;
             }
         }
         p->link->next=p->next;
@@ -157,7 +167,7 @@ int Delete_node(struct List *L,struct node* dnode){
         L->Listnum--;
         free(dnode);
         free(p);
-        puts("List insert sucess!");
+        puts("List delete sucess!");
         return delnum;
     }else{
         puts("List not have same node,delete node is not exist.");
@@ -176,7 +186,6 @@ void Swap_node(struct node *pb,struct node *pa){
 
 int Sort_List(struct List *L,bool seril){
     struct node *pb,*pa;
-    int i;
     if(L->Listnum<=1) return 1;
     if(seril){
         pb=L->head;
