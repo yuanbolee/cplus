@@ -23,7 +23,9 @@ int Search_node(struct List *L,struct node * snode){
     else{
         p=L->head;
         for(i=1;i<=L->Listnum;i++){
-            if((!strcmp(snode->name,p->name)) || (snode->m==p->m)) return i;
+            if((!strcmp(snode->name,p->name)) || (snode->m==p->m)){ 
+                return i;
+            }
             p=p->next;
         }
     }
@@ -52,8 +54,7 @@ struct node *create_node(int i){
         if(pnum<=0)return NULL;
         strcpy(p->name,pname);
         p->m=pnum;
-        p->next=NULL;
-        p->link=NULL;
+        p->next=NULL;p->link=NULL;
         return p;
     }else return NULL;
 }
@@ -112,6 +113,7 @@ void initlist(struct List *L,int n){
                     if(i==n){
                         L->tail=p;
                         p->next=L->head;
+                        L->head->link=p;
                         }
                     }
             }else{
@@ -140,21 +142,31 @@ int Insert_node(struct List *L,struct node *inode){
 
 int Delete_node(struct List *L,struct node *dnode){
     int delnum,i;
-    struct node *pb,*pa;
+    struct node *p, *pb,*pa;
     delnum=Search_node(L,dnode);
     if(delnum>0){
         if(L->Listnum==1){
             Destroy_List(L);
             return true;
+        }else{
+            if(delnum==1){p=L->head;L->head=L->head->next;}
+            if(delnum==L->Listnum){p=L->tail;L->tail=L->tail->link;}
+            if(delnum>1 && delnum<L->Listnum){
+                p=L->head;
+                for(i=1;i<=L->Listnum;i++){
+                    if(i=delnum) break;
+                    p=p->next;
+                }
+
+            }
+            p->link->next=p->next;
+            p->next->link=p->link;
+            L->Listnum--;
+            free(dnode);
+            free(p);
+            puts("List delete sucess!");
+            return delnum;
         }
-        if(dnode==L->head)L->head=L->head->next;
-        if(dnode==L->tail)L->tail=L->tail->link;
-        dnode->link->next=dnode->next;
-        dnode->next->link=dnode->link;
-        L->Listnum--;
-        free(dnode);
-        puts("List delete sucess!");
-        return delnum;
     }else{
         puts("List not have same node,delete node is not exist.");
         return false;
