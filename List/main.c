@@ -1,14 +1,14 @@
-#include "Create_node.c"
-#include "Delete_node.c"
-#include "Insert_node.c"
+#include "Create_node.h"
+#include "Delete_node.h"
+#include "Insert_node.h"
 //
-#include "Sort_List.c"
-#include "Destroy_List.c"
-#include "Init_List.c"
+#include "Sort_List.h"
+#include "Destroy_List.h"
+#include "Init_List.h"
 
-#ifndef _CF_
-#define _CF_
-#include "config.c"
+#ifndef _CF_H
+#define _CF_H
+#include "config.h"
 #endif
 
 
