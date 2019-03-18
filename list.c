@@ -114,8 +114,9 @@ void initlist(struct List *L,int n){
                         L->tail=p;
                         p->next=L->head;
                         L->head->link=p;
-                        }
                     }
+                }
+                Sort_List(L,false);
             }else{
                     puts("Create List error!\nExit ");
                     //Destroy_List(L);
