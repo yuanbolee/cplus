@@ -129,7 +129,7 @@ int Insert_node(struct List *L,struct node *inode){
         return 0;
     }else{
         puts("List insert sucess!");
-        L->tail->link->next=inode;
+        L->tail->next=inode;
         inode->link=L->tail;
         inode->next=L->head;
         L->tail=inode;
@@ -140,33 +140,19 @@ int Insert_node(struct List *L,struct node *inode){
 
 int Delete_node(struct List *L,struct node *dnode){
     int delnum,i;
-    struct node *p;
+    struct node *pb,*pa;
     delnum=Search_node(L,dnode);
     if(delnum>0){
-        if (delnum==1){
-            if(L->Listnum==1){
-                Destroy_List(L);
-                return true;
-            }
-            p=L->head;
-            L->head=L->head->next;
+        if(L->Listnum==1){
+            Destroy_List(L);
+            return true;
         }
-        if(L->Listnum==delnum && (delnum!=1)){
-            p=L->tail;
-            L->tail=L->tail->link;
-        }
-        if((L->Listnum>delnum) && (delnum!=1) ){
-            p=L->head;
-            for(i=1;i<=L->Listnum;i++){
-                if (i==delnum) break;
-                p=p->next;
-            }
-        }
-        p->link->next=p->next;
-        p->next->link=p->link;
+        if(dnode==L->head)L->head=L->head->next;
+        if(dnode==L->tail)L->tail=L->tail->link;
+        dnode->link->next=dnode->next;
+        dnode->next->link=dnode->link;
         L->Listnum--;
         free(dnode);
-        free(p);
         puts("List delete sucess!");
         return delnum;
     }else{
@@ -177,8 +163,8 @@ int Delete_node(struct List *L,struct node *dnode){
 void Swap_node(struct node *pb,struct node *pa){
     char pname[StrN];
     pa->m+=pb->m;
-    pb->m=(pa->m)-(pb->m);
-    pa->m=(pa->m)-(pb->m);
+    pb->m=pa->m-pb->m;
+    pa->m=pa->m-pb->m;
     strcpy(pname,pa->name);
     strcpy(pa->name,pb->name);
     strcpy(pb->name,pname);
@@ -242,6 +228,7 @@ int main(int argc,char *arg[]){
             break;
         }else if(Insert_node(&L,p)){
             Print_List(&L,true);
+            Print_List(&L,false);
             break;
         }
     }
