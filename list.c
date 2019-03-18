@@ -206,14 +206,29 @@ int Print_List(struct List *L,bool reverse){
         printf("List have no node!\n");
         return false;
     }else{
-        if(reverse){
-            p=L->tail;
-            for(i=L->Listnum;i>0;i--,p=p->link)
+        switch(reverse){
+            case true:
+                p=L->tail;
+                for(i=L->Listnum;i>0;i--,p=p->link)
+                    printf("Node(%i) is (%s,%d)\n",i,p->name,p->m);
+                break;
+            case false:
+                p=L->head;
+                for(i=1;i<=L->Listnum;i++,p=p->next)
                 printf("Node(%i) is (%s,%d)\n",i,p->name,p->m);
-        }else{
-            p=L->head;
-            for(i=0;i<L->Listnum;i++,p=p->next)
-                printf("Node(%i) is (%s,%d)\n",i+1,p->name,p->m);
+                break;
+            case 2:
+                p=L->tail;
+                for(i=L->Listnum*2;i>0;i--,p=p->link)
+                    printf("Node(%i) is (%s,%d)\n",i,p->name,p->m);
+                break;
+            case 3:
+                p=L->head;
+                for(i=1;i<=L->Listnum*2;i++,p=p->next)
+                printf("Node(%i) is (%s,%d)\n",i,p->name,p->m);
+                break;
+            default:
+                break;
         }
     }
     return true;
@@ -228,8 +243,8 @@ int main(int argc,char *arg[]){
     scanf("%d",&n);
     if(n>=1) initlist(&L ,n);
     else exit(0);
-    Print_List(&L,false);
-    Print_List(&L,true);
+    Print_List(&L,2);
+    Print_List(&L,3);
     while(true){
         puts("\nNow is insert node.");
         p=create_node(-1);
