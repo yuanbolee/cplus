@@ -12,6 +12,7 @@ struct node {
     struct node *next,*link;
 };
 struct List{
+    char Lname[StrN];
     struct node *head,*tail;
     int Listnum;
 };
