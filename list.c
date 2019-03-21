@@ -92,7 +92,7 @@ void initlist(struct List *L,int n){
             if(p){
                 if(Search_node(L,p)>0){
                     i--;
-                    printf("List have same node!\n");
+                    puts("List have same node!");
                     free(p);
                     continue;
                 }
@@ -116,7 +116,7 @@ void initlist(struct List *L,int n){
                         L->head->link=p;
                     }
                 }
-                Sort_List(L,false);
+                //Sort_List(L,false);
             }else{
                     puts("Create List error!\nExit ");
                     //Destroy_List(L);
@@ -143,7 +143,7 @@ int Insert_node(struct List *L,struct node *inode){
 
 int Delete_node(struct List *L,struct node *dnode){
     int delnum,i;
-    struct node *p, *pb,*pa;
+    struct node *p;
     delnum=Search_node(L,dnode);
     if(delnum>0){
         if(L->Listnum==1){
@@ -182,21 +182,23 @@ void Swap_node(struct node *pb,struct node *pa){
 
 int Sort_List(struct List *L,bool seril){
     struct node *pb,*pa;
-    if(L->Listnum<=1) return 1;
-    if(seril){
-        pb=L->head;
-        do{ pa=pb->next;
-            if((pa->m)>(pb->m))Swap_node(pb,pa);
-            pb=pb->next;
-        }while(pa!=L->tail);
-    }else{
-        pa=L->tail;
-        do{ pb=pa->link;
-            if((pa->m)>(pb->m))Swap_node(pb,pa);
-            pa=pa->link;
-        }while(pb!=L->head);
+    if(L->Listnum<=1) return 0;
+    else{
+        if(seril){
+            pb=L->head;
+            do{ pa=pb->next;
+                if((pb->m)>(pa->m))Swap_node(pb,pa);
+                pb=pb->next;
+            }while(pa!=L->tail);
+        }else{
+            pa=L->tail;
+            do{ pb=pa->link;
+                if((pb->m)>(pa->m))Swap_node(pb,pa);
+                pa=pa->link;
+            }while(pb!=L->head);
+        }
+    return 1;
     }
-    return 0;
 }
 int Print_List(struct List *L,bool reverse){
     int i;
@@ -215,7 +217,7 @@ int Print_List(struct List *L,bool reverse){
             case false:
                 p=L->head;
                 for(i=1;i<=L->Listnum;i++,p=p->next)
-                printf("Node(%i) is (%s,%d)\n",i,p->name,p->m);
+                    printf("Node(%i) is (%s,%d)\n",i,p->name,p->m);
                 break;
             case 2:
                 p=L->tail;
@@ -225,7 +227,7 @@ int Print_List(struct List *L,bool reverse){
             case 3:
                 p=L->head;
                 for(i=1;i<=L->Listnum*2;i++,p=p->next)
-                printf("Node(%i) is (%s,%d)\n",i,p->name,p->m);
+                    printf("Node(%i) is (%s,%d)\n",i,p->name,p->m);
                 break;
             default:
                 break;
@@ -269,7 +271,6 @@ int main(int argc,char *arg[]){
             }
     }
     Destroy_List(&L);
-    
     return 0;
 }
 
