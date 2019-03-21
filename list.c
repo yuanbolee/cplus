@@ -242,6 +242,9 @@ int main(int argc,char *arg[]){
     struct List L;
     struct node *p;
     int n;
+    for(n=0;n<argc;n++)
+        printf("(i arg is %s)",arg[n]);
+    puts("");
     printf("Please input num of nodes:");
     scanf("%d",&n);
     if(n>=1) initlist(&L ,n);
