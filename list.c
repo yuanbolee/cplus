@@ -239,7 +239,7 @@ int Print_List(struct List *L,bool reverse){
 
 
 int main(int argc,char *arg[]){
-    struct List L;
+    struct List La,Lb;
     struct node *p;
     int n;
     for(n=0;n<argc;n++)
@@ -247,19 +247,19 @@ int main(int argc,char *arg[]){
     puts("");
     printf("Please input num of nodes:");
     scanf("%d",&n);
-    if(n>=1) initlist(&L ,n);
+    if(n>=1) initlist(&La ,n);
     else exit(0);
-    Print_List(&L,2);
-    Print_List(&L,3);
+    Print_List(&La,2);
+    Print_List(&La,3);
     while(true){
         puts("\nNow is insert node.");
         p=create_node(-1);
         if(!p) {
             puts("Error of create node");
             break;
-        }else if(Insert_node(&L,p)){
-            Print_List(&L,true);
-            Print_List(&L,false);
+        }else if(Insert_node(&La,p)){
+            Print_List(&La,true);
+            Print_List(&La,false);
             break;
         }
     }
@@ -269,12 +269,12 @@ int main(int argc,char *arg[]){
         if(!p) {
             puts("Error of create node");
             break;
-        }else if(Delete_node(&L,p)) {
-            Print_List(&L,true);
+        }else if(Delete_node(&La,p)) {
+            Print_List(&La,true);
             break;
             }
     }
-    Destroy_List(&L);
+    Destroy_List(&La);
     return 0;
 }
 
