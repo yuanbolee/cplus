@@ -81,11 +81,20 @@ int Destroy_List(struct List *L){
 }
 
 
-void initlist(struct List *L,int n){
-    int i;
+void initlist(struct List *L){
+    int i,n;
     struct node *p,*plink;
+
     int Sort_List(struct List *L,bool seril);
     plink=NULL;
+    puts("Please input List name:");
+    scanf("%s",L->Lname);
+    printf("Please input num of nodes:");
+    scanf("%d",&n);
+    if(n<=0){
+        puts("Input n is error.");
+        return NULL;
+    }
 
     if(n>=1){
         for (i=1;i<=n;i++){
@@ -175,7 +184,7 @@ void Swap_node(struct node *pb,struct node *pa){
     char pname[StrN];
     pa->m+=pb->m;
     pb->m=pa->m-pb->m;
-    pa->m=pa->m-pb->m;
+    pa->m=pa->m-pb->m;a
     strcpy(pname,pa->name);
     strcpy(pa->name,pb->name);
     strcpy(pb->name,pname);
@@ -204,9 +213,9 @@ int Sort_List(struct List *L,bool seril){
 int Print_List(struct List *L,bool reverse){
     int i;
     struct node *p;
-    printf("Print List number is (%d):\n",L->Listnum);
+    printf("Print List %s number is (%d):\n",L->Lname,L->Listnum);
     if(L->Listnum==0) {
-        printf("List have no node!\n");
+        printf("List %s have no node!\n",L->Lname);
         return false;
     }else{
         switch(reverse){
@@ -219,7 +228,10 @@ int Print_List(struct List *L,bool reverse){
                 p=L->head;
                 for(i=1;i<=L->Listnum;i++,p=p->next)
                     printf("Node(%i) is (%s,%d)\n",i,p->name,p->m);
-                break;
+                break;    puts("Please input List name:");
+    scanf("%s",&La.Lname);
+    printf("Please input num of nodes:");
+    scanf("%d",&n);
             case 2:
                 p=L->tail;
                 for(i=L->Listnum*2;i>0;i--,p=p->link)
@@ -228,7 +240,7 @@ int Print_List(struct List *L,bool reverse){
             case 3:
                 p=L->head;
                 for(i=1;i<=L->Listnum*2;i++,p=p->next)
-                    printf("Node(%i) is (%s,%d)\n",i,p->name,p->m);
+                    printf("aNode(%i) is (%s,%d)\n",i,p->name,p->m);
                 break;
             default:
                 break;
@@ -244,13 +256,11 @@ int main(int argc,char *arg[]){
     int n;
     for(n=0;n<argc;n++)
         printf("(i arg is %s)",arg[n]);
-    puts("");
-    printf("Please input num of nodes:");
-    scanf("%d",&n);
-    if(n>=1) initlist(&La ,n);
-    else exit(0);
+
+    initlist(&La);
+    initlist(&Lb);
     Print_List(&La,2);
-    Print_List(&La,3);
+    Print_List(&Lb,3);
     while(true){
         puts("\nNow is insert node.");
         p=create_node(-1);
