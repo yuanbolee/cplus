@@ -93,7 +93,7 @@ void initlist(struct List *L){
     scanf("%d",&n);
     if(n<=0){
         puts("Input n is error.");
-        return NULL;
+        return ;
     }
 
     if(n>=1){
@@ -184,7 +184,7 @@ void Swap_node(struct node *pb,struct node *pa){
     char pname[StrN];
     pa->m+=pb->m;
     pb->m=pa->m-pb->m;
-    pa->m=pa->m-pb->m;a
+    pa->m=pa->m-pb->m;
     strcpy(pname,pa->name);
     strcpy(pa->name,pb->name);
     strcpy(pb->name,pname);
@@ -228,10 +228,7 @@ int Print_List(struct List *L,bool reverse){
                 p=L->head;
                 for(i=1;i<=L->Listnum;i++,p=p->next)
                     printf("Node(%i) is (%s,%d)\n",i,p->name,p->m);
-                break;    puts("Please input List name:");
-    scanf("%s",&La.Lname);
-    printf("Please input num of nodes:");
-    scanf("%d",&n);
+                break;    
             case 2:
                 p=L->tail;
                 for(i=L->Listnum*2;i>0;i--,p=p->link)
